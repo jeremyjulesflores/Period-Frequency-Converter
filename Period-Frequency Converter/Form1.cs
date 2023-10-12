@@ -39,6 +39,7 @@ namespace Period_Frequency_Converter
             button2.Enabled = false;
 
         }
+        //checks if input text box is not empty
         private void TextBox_CheckIfEmpty(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -49,6 +50,7 @@ namespace Period_Frequency_Converter
             // Enable or disable button2 based on textBox2's content
             button2.Enabled = !string.IsNullOrWhiteSpace(textBox2.Text);
         }
+        //Checks if input is number 
         private void TextBox_Checking(object sender, KeyPressEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -89,6 +91,7 @@ namespace Period_Frequency_Converter
             }
         }
 
+        //Convert period to seconds 
         private double GetPeriodInSeconds()
         {
             double periods = double.Parse(textBox2.Text);
@@ -111,6 +114,7 @@ namespace Period_Frequency_Converter
             }
         }
 
+        //Convert Frequency to Hz
         private double GetFrequencyInHertz()
         {
             double frequency = double.Parse(textBox1.Text);
@@ -133,7 +137,7 @@ namespace Period_Frequency_Converter
             }
         }
 
-        // T -> F
+        // T -> F Period to Frequency
         private void button2_Click(object sender, EventArgs e)
         {
             double periodsInSeconds = GetPeriodInSeconds();
@@ -143,11 +147,14 @@ namespace Period_Frequency_Converter
             textBox1.Text = answer.ToString();
         }
 
-        // f -> T
+        // f -> T Frequency to Period
         private void button1_Click(object sender, EventArgs e)
         {
+            //Current unit of frequeny to Hz
             double frequencyInHertz = GetFrequencyInHertz();
+            // Hz to Period
             double periods = 1.0 / frequencyInHertz;
+            // Seconds to Output Unit (ms ns ps etc.)
             double answer = ConvertToOutputUnit(periods, "s", comboBox2.SelectedItem.ToString());
             textBox2.Text = answer.ToString();
         }
